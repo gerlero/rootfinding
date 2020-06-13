@@ -4,6 +4,9 @@ import setuptools
 
 import rootfinding
 
+with open("README.rst", "r") as f:
+    readme = f.read()
+
 extras = {
     'publish': ['setuptools', 'wheel', 'twine']
 }
@@ -15,7 +18,7 @@ setuptools.setup(
     author="Gabriel S. Gerlero",
     author_email="ggerlero@cimec.unl.edu.ar",
     description=rootfinding.__doc__,
-    long_description=rootfinding.__doc__,
+    long_description=readme,
     url="https://github.com/gerlero/rootfinding",
     project_urls={
         'Bug Tracker': "https://github.com/gerlero/rootfinding/issues",
