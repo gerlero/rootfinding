@@ -97,7 +97,7 @@ def bracket_root(f, interval, growth_factor=2, maxiter=100,
     Find an interval that brackets a root of a function by searching in one
     direction.
 
-    Starting from an interval, it moves and extends the interval in the
+    Starting from an interval, it moves and expands the interval in the
     direction of the second endpoint until the interval brackets a root of the
     given function.
 
@@ -112,13 +112,13 @@ def bracket_root(f, interval, growth_factor=2, maxiter=100,
         How much to grow the length of the interval in each iteration.
     maxiter : int or None, optional
         Maximum number of iterations. Must be nonnegative. An
-        `IterationLimitReached` exception will be raised if the bracket is not
-        found within the specified number of iterations. If `None`, there is no
-        maximum number of iterations.
+        :exc:`IterationLimitReached` exception will be raised if the bracket is
+        not found within the specified number of iterations. If `None`,
+        there is no maximum number of iterations.
     f_interval : sequence of two of {None, float}, optional
-        Values of `f` at the interval endpoints, if known (`None` if a value is
-        not known). For every known value, an additional call to `f` will be
-        avoided.
+        Values of `f` at the endpoints of the interval, if known (use `None` if
+        a value is not known). For every known value, one fewer call to `f`
+        will be required.
     ftol : None or float
         An optional absolute tolerance for the value of `f` at a root. If
         given, the algorithm will immediately return any root it happens to
@@ -128,8 +128,13 @@ def bracket_root(f, interval, growth_factor=2, maxiter=100,
     -------
     result : Result
         Normally contains a bracket and no root. However, if `ftol` is not
-        `None` and a root is found, it will contain that root. In this case,
-        the result may or may not include a bracket for that root.
+        `None` and a root is found, it will contain that root; in this case,
+        the result will also include a bracket only if one was found at the
+        same time as the root.
+
+    See also
+    --------
+    bisect
 
     Notes
     -----
@@ -211,8 +216,8 @@ def bracket_root(f, interval, growth_factor=2, maxiter=100,
 
 class NotABracketError(ValueError):
     """
-    Exception raised by `bisect` when the interval passed as `bracket` does not
-    actually contain a root.
+    Exception raised by :func:`bisect` when the interval passed as `bracket`
+    does not actually contain a root.
 
     Attributes
     ----------
@@ -236,9 +241,9 @@ def bisect(f, bracket, ftol=1e-12, maxiter=100, f_bracket=(None, None)):
 
     The function must have opposite signs at the endpoints of the bracket.
 
-    Compared to SciPy's `scipy.optimize.bisect` function, this function defines
-    convergence with respect to the residual (i.e., the value of `f` when
-    evaluated at the found approximate root).
+    Compared to SciPy's :func:`scipy.optimize.bisect` and
+    :func:`scipy.optimize.root_scalar` functions, this function tests for a
+    root by looking only at the residual (i.e., the value of `f`).
 
     Parameters
     ----------
@@ -246,25 +251,29 @@ def bisect(f, bracket, ftol=1e-12, maxiter=100, f_bracket=(None, None)):
         Continuous scalar function.
     bracket: sequence of two floats
         An interval bracketing a root. `f` must have different signs at the two
-        endpoints, or a `NotABracketError` will be raised. It is not necessary
-        that ``bracket[0] < bracket[1]``.
+        endpoints, or a :exc:`NotABracketError` will be raised. It is not
+        necessary that ``bracket[0] < bracket[1]``.
     ftol : float, optional
         Absolute tolerance for the value of `f` at the root. Must be
         nonnegative.
     maxiter : int or None, optional
         Maximum number of iterations. Must be nonnegative. An
-        `IterationLimitReached` exception will be raised if the specified
+        :exc:`IterationLimitReached` exception will be raised if the specified
         tolerance is not achieved within this number of iterations. If `None`,
         there is no maximum number of iterations.
     f_bracket : sequence of two of {None, float}, optional
-        Values of `f` at the endpoints of `bracket`, if known (`None` if a
-        value is not known). For every known value, an additional call to `f`
-        will be avoided.
+        Values of `f` at the endpoints of `bracket`, if known (use `None` if a
+        value is not known). For every known value, one fewer call to `f` will
+        be required.
 
     Returns
     -------
     result : Result
         Contains the root and the final bracket.
+
+    See also
+    --------
+    bracket_root : Can find a bracket when one is not known.
 
     Notes
     -----
