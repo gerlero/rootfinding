@@ -8,9 +8,10 @@ with open("README.rst", "r") as f:
     readme = f.read()
 
 extras = {
+    'doc': ['sphinx', 'sphinx_rtd_theme'],
     'publish': ['setuptools', 'wheel', 'twine']
 }
-extras['dev'] = extras['publish']
+extras['dev'] = extras['doc'] + extras['publish']
 
 setuptools.setup(
     name='rootfinding',
@@ -21,6 +22,7 @@ setuptools.setup(
     long_description=readme,
     url="https://github.com/gerlero/rootfinding",
     project_urls={
+        'Documentation:': "https://rootfinding.readthedocs.io",
         'Bug Tracker': "https://github.com/gerlero/rootfinding/issues",
         'Source Code': "https://github.com/gerlero/rootfinding",
     },

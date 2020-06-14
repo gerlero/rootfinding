@@ -6,6 +6,10 @@
    :target: https://pypi.org/project/rootfinding/
    :alt: PyPI
 
+.. image:: https://img.shields.io/readthedocs/rootfinding.svg
+   :target: https://rootfinding.readthedocs.io
+   :alt: Read the Docs - Documentation
+
 .. image:: https://img.shields.io/pypi/pyversions/rootfinding.svg
    :target: https://pypi.org/project/rootfinding/
    :alt: PyPI - Python Version
@@ -24,3 +28,9 @@ To use this library, install ``rootfinding`` from PyPI_ as ``$ pip install rootf
 .. _SciPy: https://docs.scipy.org/doc/scipy/reference/optimize.html#scalar-functions
 .. _Fronts: https://github.com/gerlero/fronts
 .. _PyPI: https://pypi.org/project/rootfinding
+
+.. doc-inclusion-marker
+
+Documentation is available on `Read the Docs`_.
+
+.. _Read the Docs: https://rootfinding.readthedocs.io
