@@ -22,7 +22,7 @@
    :target: https://pypi.org/project/rootfinding/
    :alt: PyPI - Python Version
 
-.. image:: https://img.shields.io/badge/pypi/l/rootfinding.svg
+.. image:: https://img.shields.io/pypi/l/rootfinding.svg
    :target: https://github.com/gerlero/rootfinding/blob/master/LICENSE.txt
    :alt: PyPI - License
 
