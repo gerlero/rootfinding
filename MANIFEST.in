@@ -8,3 +8,6 @@ recursive-include doc *.bat
 recursive-include doc *.py
 recursive-include doc *.rst
 recursive-include doc Makefile
+
+# tests
+recursive-include tests *.py

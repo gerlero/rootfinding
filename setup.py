@@ -9,9 +9,10 @@ with open("README.rst", "r") as f:
 
 extras = {
     'doc': ['sphinx', 'sphinx_rtd_theme'],
+    'test': ['pytest'],
     'publish': ['setuptools', 'wheel', 'twine']
 }
-extras['dev'] = extras['doc'] + extras['publish']
+extras['dev'] = extras['doc'] + extras['test'] + extras['publish']
 
 setuptools.setup(
     name='rootfinding',
@@ -38,6 +39,7 @@ setuptools.setup(
                  'Topic :: Scientific/Engineering :: Mathematics',
                  'Topic :: Software Development :: Libraries',
                  'Operating System :: OS Independent'],
+    tests_require=extras['test'],
     extras_require=extras,
     python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*',
     options={'bdist_wheel': {'universal': '1'}}
