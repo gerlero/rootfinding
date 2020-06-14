@@ -10,6 +10,10 @@
    :target: https://travis-ci.org/gerlero/rootfinding
    :alt: Travis CI - Build
 
+.. image:: https://img.shields.io/codecov/c/gh/gerlero/rootfinding
+  :target: https://codecov.io/gh/gerlero/rootfinding
+  :alt: codecov - Code coverage
+
 .. image:: https://img.shields.io/readthedocs/rootfinding.svg
    :target: https://rootfinding.readthedocs.io
    :alt: Read the Docs - Documentation
