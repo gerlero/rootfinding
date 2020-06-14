@@ -9,7 +9,7 @@ with open("README.rst", "r") as f:
 
 extras = {
     'doc': ['sphinx', 'sphinx_rtd_theme'],
-    'test': ['pytest'],
+    'test': ['pytest-cov'],
     'publish': ['setuptools', 'wheel', 'twine']
 }
 extras['dev'] = extras['doc'] + extras['test'] + extras['publish']

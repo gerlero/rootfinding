@@ -9,7 +9,10 @@ python:
   - "nightly"  # nightly build
 
 install:
-  - pip install .[test]
+  - pip install .[test] codecov
 
 script:
-  - pytest
+  - pytest --cov=rootfinding
+
+after_success:
+  - codecov
