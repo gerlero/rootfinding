@@ -12,6 +12,7 @@ install:
   - pip install .[test] codecov
 
 script:
+  - check-manifest
   - pytest --cov=rootfinding
 
 after_success:
