@@ -6,6 +6,10 @@
    :target: https://pypi.org/project/rootfinding/
    :alt: PyPI
 
+.. image:: https://img.shields.io/travis/gerlero/rootfinding/master
+   :target: https://travis-ci.org/gerlero/rootfinding
+   :alt: Travis CI - Build
+
 .. image:: https://img.shields.io/readthedocs/rootfinding.svg
    :target: https://rootfinding.readthedocs.io
    :alt: Read the Docs - Documentation
