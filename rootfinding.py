@@ -32,7 +32,7 @@
 
 from __future__ import division, absolute_import, print_function
 
-__version__ = '1.0.0-dev0'
+__version__ = '1.0.0'
 
 import itertools
 
