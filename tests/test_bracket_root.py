@@ -4,58 +4,23 @@ import sys
 
 import rootfinding
 
+from checkobj import check_result, check_iterationlimitreached
+
 def f(x):
     f.calls += 1
     return x**2 - 1
 
-
-def check_result_full(result, f):
-    fcalls = f.calls
-    assert result.function_calls == fcalls
-    assert 0 <= result.iterations <= fcalls
-    assert isinstance(result, rootfinding.Result)
-    assert result.f_root == f(result.root)
-    assert len(result.bracket) == 2
-    assert len(result.f_bracket) == 2
-    assert all(y == f(x) for x,y in zip(result.bracket, result.f_bracket))
-    f.calls = fcalls
-
-
-def check_result_bracketonly(result, f):
-    fcalls = f.calls
-    assert result.function_calls == fcalls
-    assert 0 <= result.iterations <= fcalls
-    assert isinstance(result, rootfinding.Result)
-    assert result.root is None
-    assert result.f_root is None
-    assert len(result.bracket) == 2
-    assert len(result.f_bracket) == 2
-    assert all(y == f(x) for x,y in zip(result.bracket, result.f_bracket))
-    f.calls = fcalls
-
-
-def check_result_rootonly(result, f):
-    fcalls = f.calls
-    assert result.function_calls == fcalls
-    assert 0 <= result.iterations <= fcalls
-    assert isinstance(result, rootfinding.Result)
-    assert result.f_root == f(result.root)
-    assert result.bracket is None
-    assert result.f_bracket is None
-    f.calls = fcalls
-
-
-def test_bracket_root():
+def test_success():
     f.calls = 0
 
     result = rootfinding.bracket_root(f, (0, -0.1))
 
-    check_result_bracketonly(result, f)
+    check_result(result, f, f_calls=f.calls, has_bracket=True, has_root=False)
     assert result.iterations >= 1
     rootfinding.bisect(f, result.bracket, f_bracket=result.f_bracket)
 
 
-def test_bracket_root_instantbracket():
+def test_instantbracket():
     interval = (0, 2)
     f_interval = (None, f(interval[1]))
     f.calls = 0
@@ -63,43 +28,43 @@ def test_bracket_root_instantbracket():
     result = rootfinding.bracket_root(f, interval, f_interval=f_interval, maxiter=0)
 
     assert f.calls == 1
-    check_result_bracketonly(result, f)
+    check_result(result, f, f_calls=f.calls, has_bracket=True, has_root=False)
     rootfinding.bisect(f, result.bracket, f_bracket=result.f_bracket)
 
 
-def test_bracket_root_instantroot():
+def test_instantroot():
     interval = (0, -1)
     f_interval = (f(interval[0]), None)
+    ftol = 0
     f.calls = 0
 
-    result = rootfinding.bracket_root(f, interval, f_interval=f_interval, ftol=0, maxiter=0)
+    result = rootfinding.bracket_root(f, interval, f_interval=f_interval, ftol=ftol, maxiter=0)
 
     assert f.calls == 1
-    check_result_rootonly(result, f)
+    check_result(result, f, ftol=ftol, f_calls=f.calls, has_bracket=False, has_root=True)
 
 
-def test_bracket_root_instantrootwithbracket():
+def test_instantrootwithbracket():
     interval = (0, -1.00001)
     f_interval = (f(interval[0]), None)
+    ftol = 1e-3
     f.calls = 0
 
-    result = rootfinding.bracket_root(f, interval, f_interval=f_interval, ftol=1e-3, maxiter=0)
+    result = rootfinding.bracket_root(f, interval, f_interval=f_interval, ftol=ftol, maxiter=0)
 
     assert f.calls == 1
-    check_result_full(result, f)
+    check_result(result, f, ftol=ftol, f_calls=f.calls, has_bracket=True, has_root=True)
     rootfinding.bisect(f, result.bracket)
 
 
-def test_bracket_root_iterationlimit():
+def test_iterationlimit():
     f.calls = 0
 
     with pytest.raises(rootfinding.IterationLimitReached) as exc_info:
         result = rootfinding.bracket_root(f, (-1, -2))
 
-    error = exc_info.value
-    assert len(error.interval) == 2
-    assert len(error.f_interval) == 2
-    assert all(y == f(x) for x,y in zip(error.interval, error.f_interval))
+    exc = exc_info.value
+    check_iterationlimitreached(exc, f, f_calls=f.calls)
 
     with pytest.raises(rootfinding.NotABracketError):
-        rootfinding.bisect(f, error.interval, f_bracket=error.f_interval)
+        rootfinding.bisect(f, exc.interval, f_bracket=exc.f_interval)
