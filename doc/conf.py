@@ -59,8 +59,8 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-# ++ interphinx mappings +++++++++++++++++++++++++++++++++++++++++++++++++++++
+# ++ intersphinx mappings ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 intersphinx_mapping = {
 	'scipy': ('https://docs.scipy.org/doc/scipy/reference/', None)
-	}
+}
