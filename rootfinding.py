@@ -106,8 +106,9 @@ def bracket_root(f, interval, growth_factor=2, maxiter=100,
     f : callable
         Continuous scalar function.
     interval : sequence of two floats
-        Starting interval. Must have non-equal endpoints. It is not necessary
-        that ``interval[0] < interval[1]``.
+        Starting interval. Must have non-equal endpoints, but they do not need
+        to be listed in order. During the search, the interval will be expanded
+        in the direction of ``interval[1]``.
     growth_factor : float, optional
         How much to grow the length of the interval in each iteration.
     maxiter : int or None, optional
@@ -254,8 +255,8 @@ def bisect(f, bracket, ftol=1e-12, maxiter=100, f_bracket=(None, None)):
         Continuous scalar function.
     bracket: sequence of two floats
         An interval bracketing a root. `f` must have different signs at the two
-        endpoints, or a :exc:`NotABracketError` will be raised. It is not
-        necessary that ``bracket[0] < bracket[1]``.
+        endpoints, or a :exc:`NotABracketError` will be raised. The endpoints
+        do not need to be listed in order.
     ftol : float, optional
         Absolute tolerance for the value of `f` at the root. Must be
         nonnegative.
