@@ -142,6 +142,9 @@ def bracket_root(f, interval, growth_factor=2, maxiter=100,
     as roots, the one where the absolute value of `f` is lower is chosen as the
     root.
     """
+    if ftol is not None and ftol < 0:
+        raise ValueError("ftol cannot be negative")
+
     if maxiter is not None and maxiter < 0:
         raise ValueError("maxiter cannot be negative")
 
