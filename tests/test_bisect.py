@@ -35,6 +35,18 @@ def test_instant():
     assert result.root == 1
 
 
+def test_instant2():
+    bracket =  (1, -1.00001)
+    f_bracket = (f(bracket[0]), None)
+    f.calls = 0
+
+    result = rootfinding.bisect(f, bracket, f_bracket=f_bracket, maxiter=0)
+
+    assert f.calls == 1
+    check_result(result, f, f_calls=f.calls, has_bracket=True, has_root=True)
+    assert result.root == 1
+
+
 def test_notabracket():
     interval = (-1.00001, -2)
     f.calls = 0
@@ -57,3 +69,13 @@ def test_iterationlimit():
     assert f.calls == 3
     check_iterationlimitreached(exc, f, f_calls=f.calls)
     assert any(a == b for a,b in zip(bracket, exc.interval))
+
+
+def test_invalidftol():
+    with pytest.raises(ValueError):
+        rootfinding.bisect(f, (0, -0.1), ftol=-1e-3)
+
+
+def test_invalidmaxiter():
+    with pytest.raises(ValueError):
+        rootfinding.bisect(f, (0, -0.1), maxiter=-0.5)

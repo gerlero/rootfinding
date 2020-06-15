@@ -44,8 +44,33 @@ def test_instantroot():
     check_result(result, f, ftol=ftol, f_calls=f.calls, has_bracket=False, has_root=True)
 
 
+def test_instantroot2():
+    interval = (-1, 0)
+    f_interval = (f(interval[0]), None)
+    ftol = 0
+    f.calls = 0
+
+    result = rootfinding.bracket_root(f, interval, f_interval=f_interval, ftol=ftol, maxiter=0)
+
+    assert f.calls == 1
+    check_result(result, f, ftol=ftol, f_calls=f.calls, has_bracket=False, has_root=True)
+
+
 def test_instantrootwithbracket():
     interval = (0, -1.00001)
+    f_interval = (f(interval[0]), None)
+    ftol = 1e-3
+    f.calls = 0
+
+    result = rootfinding.bracket_root(f, interval, f_interval=f_interval, ftol=ftol, maxiter=0)
+
+    assert f.calls == 1
+    check_result(result, f, ftol=ftol, f_calls=f.calls, has_bracket=True, has_root=True)
+    rootfinding.bisect(f, result.bracket)
+
+
+def test_instantrootwithbracket2():
+    interval = (-1.00001, 0)
     f_interval = (f(interval[0]), None)
     ftol = 1e-3
     f.calls = 0
@@ -68,3 +93,18 @@ def test_iterationlimit():
 
     with pytest.raises(rootfinding.NotABracketError):
         rootfinding.bisect(f, exc.interval, f_bracket=exc.f_interval)
+
+
+def test_invalidinterval():
+    with pytest.raises(ValueError):
+        rootfinding.bracket_root(f, (0, 0))
+
+
+def test_invalidftol():
+    with pytest.raises(ValueError):
+        rootfinding.bracket_root(f, (0, -0.1), ftol=-1e-3)
+
+
+def test_invalidmaxiter():
+    with pytest.raises(ValueError):
+        rootfinding.bracket_root(f, (0, -0.1), maxiter=-0.5)
