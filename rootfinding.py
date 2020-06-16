@@ -107,10 +107,11 @@ def bracket_root(f, interval, growth_factor=2, maxiter=100,
         Continuous scalar function.
     interval : sequence of two floats
         Starting interval. Must have non-equal endpoints, but they do not need
-        to be listed in order. During the search, the interval will be expanded
-        in the direction of ``interval[1]``.
+        to be listed in order. During the search, the interval will be shifted
+        and expanded in the direction of ``interval[1]``.
     growth_factor : float, optional
-        How much to grow the length of the interval in each iteration.
+        Factor by which to grow the width of the working interval between
+        iterations. Must be >= 1.
     maxiter : int or None, optional
         Maximum number of iterations. Must be nonnegative. An
         :exc:`IterationLimitReached` exception will be raised if the bracket is
@@ -277,7 +278,7 @@ def bisect(f, bracket, ftol=1e-12, maxiter=100, f_bracket=(None, None)):
 
     See also
     --------
-    bracket_root : Can find a bracket when one is not known.
+    bracket_root : Search for a bracket.
 
     Notes
     -----
