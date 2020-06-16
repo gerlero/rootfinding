@@ -20,7 +20,7 @@ def test_success():
 
     check_result(result, f, ftol=ftol, f_calls=f.calls,
                  has_bracket=True, has_root=True)
-    assert pytest.approx(result.root) == -1
+    assert result.root == pytest.approx(-1)
 
 
 def test_instant():
