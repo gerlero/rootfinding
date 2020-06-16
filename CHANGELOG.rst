@@ -6,6 +6,7 @@ This project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.htm
 1.0.2 (Unreleased)
 ------------------
 
+- Fix `growth_factor` bug in `bracket_root()`.
 1.0.1 (2020-06-15)
 ------------------
 

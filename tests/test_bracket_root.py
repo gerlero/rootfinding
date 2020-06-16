@@ -20,6 +20,18 @@ def test_success():
     rootfinding.bisect(f, result.bracket, f_bracket=result.f_bracket)
 
 
+def test_growth_factor2():
+    growth_factor = 3.14
+    interval = (0, -0.1)
+    f.calls = 0
+
+    result = rootfinding.bracket_root(f, interval, growth_factor=growth_factor)
+
+    check_result(result, f, f_calls=f.calls, has_bracket=True, has_root=False)
+
+    assert result.bracket[1] - result.bracket[0] == pytest.approx((interval[1] - interval[0])*growth_factor**result.iterations)
+
+
 def test_instantbracket():
     interval = (0, 2)
     f_interval = (None, f(interval[1]))

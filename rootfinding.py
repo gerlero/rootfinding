@@ -213,7 +213,7 @@ def bracket_root(f, interval, growth_factor=2, maxiter=100,
                                         f_interval=(f_a, f_b),
                                         function_calls=function_calls)
 
-        a, b = b, b + (growth_factor+1)*(b-a)
+        a, b = b, b + growth_factor*(b-a)
         f_a, f_b = f_b, f(b)
         function_calls += 1
 
