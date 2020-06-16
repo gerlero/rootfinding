@@ -10,6 +10,8 @@ This project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.htm
 
 - Improve documentation of `bracket_root()`.
 
+- `bracket_root()` now raises `ValueError` on an invalid `growth_factor`.
+
 1.0.1 (2020-06-15)
 ------------------
 

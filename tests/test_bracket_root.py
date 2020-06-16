@@ -112,6 +112,11 @@ def test_invalidinterval():
         rootfinding.bracket_root(f, (0, 0))
 
 
+def test_invalidgrowth_factor():
+    with pytest.raises(ValueError):
+        rootfinding.bracket_root(f, (0, -0.1), growth_factor=0.5)
+
+
 def test_invalidftol():
     with pytest.raises(ValueError):
         rootfinding.bracket_root(f, (0, -0.1), ftol=-1e-3)
