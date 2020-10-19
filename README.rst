@@ -5,8 +5,8 @@
    :target: https://pypi.org/project/rootfinding/
    :alt: PyPI
 
-.. image:: https://img.shields.io/travis/gerlero/rootfinding/master
-   :target: https://travis-ci.org/gerlero/rootfinding
+.. image:: https://img.shields.io/travis/com/gerlero/rootfinding/master
+   :target: https://travis-ci.com/gerlero/rootfinding
    :alt: Travis CI - Build
 
 .. image:: https://img.shields.io/codecov/c/gh/gerlero/rootfinding
