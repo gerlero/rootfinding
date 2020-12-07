@@ -9,6 +9,10 @@
    :target: https://travis-ci.com/gerlero/rootfinding
    :alt: Travis CI - Build
 
+.. image:: https://github.com/gerlero/rootfinding/workflows/CI/badge.svg
+   :target: https://github.com/gerlero/rootfinding/actions
+   :alt: GitHub Actions - CI
+
 .. image:: https://img.shields.io/codecov/c/gh/gerlero/rootfinding
   :target: https://codecov.io/gh/gerlero/rootfinding
   :alt: codecov - Code coverage
