@@ -1,6 +1,8 @@
 ``rootfinding``: find roots of scalar functions
 ===============================================
 
+**⚠️ This project is deprecated and no longer maintained**
+
 .. image:: https://img.shields.io/pypi/v/rootfinding.svg
    :target: https://pypi.org/project/rootfinding/
    :alt: PyPI
